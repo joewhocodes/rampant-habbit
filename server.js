@@ -11,14 +11,22 @@ MongoClient.connect(
         console.log('Connected to Database');
         const db = client.db('rampant-habit');
         const habitCollection = db.collection('habits');
+
+        app.set('view engine', 'ejs') 
         app.use(bodyParser.urlencoded({ extended: true }));
+
         app.get('/', (req, res) => {
-            res.sendFile(__dirname + '/index.html');
+            db.collection('habits').find().toArray()
+            .then(results => {
+                res.render('index.ejs', { habits: results })
+            })
+            .catch(error => console.error(error))
         });
+
         app.post('/habits', (req, res) => {
             habitCollection.insertOne(req.body)
             .then(result => {
-                console.log(result)
+                res.redirect('/')
             })
             .catch(error => console.error(error))
         });
