@@ -16,6 +16,13 @@
         <button type="submit">Submit</button>
     </form>
     <h2>My Habits</h2>
+    <div>
+        <h2>Habit booster</h2>
+        <p>
+          Replace a bad habit with a good one
+        </p>
+        <button id="update-button">Replace a habit</button>
+      </div>
     <ul class="habits">
         <!-- Loop through habits -->
         <% for(var i = 0; i < habits.length; i++) {%>
@@ -27,7 +34,7 @@
         </li>
         <% } %>
     </ul>
-    <%= habits %>
+    <script src="/main.js"></script>
 </body>
 
 </html>

@@ -12,24 +12,52 @@ MongoClient.connect(
         const db = client.db('rampant-habit');
         const habitCollection = db.collection('habits');
 
-        app.set('view engine', 'ejs') 
+        app.set('view engine', 'ejs');
         app.use(bodyParser.urlencoded({ extended: true }));
+        app.use(express.static('public'));
+        app.use(bodyParser.json());
 
         app.get('/', (req, res) => {
-            db.collection('habits').find().toArray()
-            .then(results => {
-                res.render('index.ejs', { habits: results })
-            })
-            .catch(error => console.error(error))
+            db.collection('habits')
+                .find()
+                .toArray()
+                .then((results) => {
+                    res.render('index.ejs', { habits: results });
+                })
+                .catch((error) => console.error(error));
         });
 
         app.post('/habits', (req, res) => {
-            habitCollection.insertOne(req.body)
-            .then(result => {
-                res.redirect('/')
-            })
-            .catch(error => console.error(error))
+            habitCollection
+                .insertOne(req.body)
+                .then((result) => {
+                    res.redirect('/');
+                })
+                .catch((error) => console.error(error));
         });
+
+        app.put('/habits', (req, res) => {
+            habitCollection
+                .findOneAndUpdate(
+                    { name: 'Bad' },
+                    {
+                        $set: {
+                            name: req.body.name,
+                            habit: req.body.quote,
+                        },
+                    },
+                    {
+                        upsert: true,
+                    }
+                )
+                .then(result => {
+                    res.json('Success')
+                })
+                .catch((error) => console.error(error));
+        });
+
+        
+
         app.listen(3000, () => {
             console.log('listening on 3000');
         });
