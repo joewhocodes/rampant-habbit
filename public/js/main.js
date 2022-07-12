@@ -8,18 +8,17 @@ Array.from(deleteText).forEach((element)=>{
 
 
 async function deleteHabit(){
-    console.log("click")
-    const name = this.parentNode.childNodes[0].innerText
-    const habit = this.parentNode.childNodes[1].innerText
+    const name = this.parentNode.childNodes[1].innerText
+    const habit = this.parentNode.childNodes[3].innerText
     try{
         const response = await fetch('deleteHabit', {
             method: 'delete',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify({
-                'name': name,
-                'habit': habit
+              'name': name,
+              'habit': habit
             })
-        })
+          })
         const data = await response.json()
         console.log(data)
         location.reload()
@@ -28,6 +27,7 @@ async function deleteHabit(){
         console.log(err)
     }
 }
+
 
 
 

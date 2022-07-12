@@ -14,37 +14,20 @@
     <h1>Cleanse bad habits, create new ones</h1>
     <form action="/addHabit" method="POST">
         <input type="text" placeholder="name" name="name">
-        <input type="text" placeholder="habit" name="habit">
+        <br>
+        <input type="radio" name="habit" value="Good">
+            <label for="Good">Good</label><br>
+        <input type="radio" name="habit" value="Bad">
+            <label for="Bad">Bad</label><br>
         <button type="submit">Submit</button>
     </form>
     <h2>My Habits</h2>
-    <div>
-        <h2>Habit booster</h2>
-        <p>
-            Replace a bad habit with a good one
-        </p>
-        <button id="update-button">Replace a habit</button>
-    </div>
-
-
-
-    <section data-position="delete-quote">
-        <div>`
-            <h2>Delete Bad Habit!</h2>
-            <p>Deletes a bad habit from the list </p>
-            <button id="delete-button">Delete Bad Habit</button>
-        </div>
-        <div id="message"></div>
-    </section>
-
 
     <ul class="habits">
         <!-- Loop through habits -->
         <% for(var i = 0; i < info.length; i++) {%>
         <li class="habit">
-            <!-- Output name from the iterated quote object -->
             <span><%= info[i].name %></span>:
-            <!-- Output quote from the iterated quote object -->
             <span><%= info[i].habit %></span>
             <span class='fa fa-trash'></span>
         </li>

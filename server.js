@@ -40,8 +40,9 @@ app.post('/addHabit', (req, res) => {
 app.delete('/deleteHabit', (req, res) => {
     db.collection('habits').deleteOne({ name: req.body.name })
         .then((result) => {
-            console.log("Deleted habit")
+            console.log(result)
             res.json('Deleted habit');
+            console.log("Deleted habit")
         })
         .catch((error) => console.error(error));
 });
