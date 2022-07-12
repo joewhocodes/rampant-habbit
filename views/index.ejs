@@ -13,11 +13,11 @@
 <body>
     <h1>Cleanse bad habits, create new ones</h1>
     <form action="/addHabit" method="POST">
-        <input type="text" placeholder="name" name="name">
+        <input type="text" placeholder="Enter habit here" name="habit">
         <br>
-        <input type="radio" name="habit" value="Good">
+        <input type="radio" name="goodBad" value="Good" checked="checked">
             <label for="Good">Good</label><br>
-        <input type="radio" name="habit" value="Bad">
+        <input type="radio" name="goodBad" value="Bad">
             <label for="Bad">Bad</label><br>
         <button type="submit">Submit</button>
     </form>
@@ -27,8 +27,8 @@
         <!-- Loop through habits -->
         <% for(var i = 0; i < info.length; i++) {%>
         <li class="habit">
-            <span><%= info[i].name %></span>:
-            <span><%= info[i].habit %></span>
+            <span><%= info[i].habit %></span>:
+            <span><%= info[i].goodBad %></span>
             <span class='fa fa-trash'></span>
         </li>
         <% } %>

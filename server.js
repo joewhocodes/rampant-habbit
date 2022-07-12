@@ -38,7 +38,7 @@ app.post('/addHabit', (req, res) => {
 
 
 app.delete('/deleteHabit', (req, res) => {
-    db.collection('habits').deleteOne({ name: req.body.name })
+    db.collection('habits').deleteOne({ habit: req.body.habit })
         .then((result) => {
             console.log(result)
             res.json('Deleted habit');
