@@ -6,11 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rampant Habit</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <h1>Cleanse bad habits, create new ones</h1>
-    <form action="/habits" method="POST">
+    <form action="/addHabit" method="POST">
         <input type="text" placeholder="name" name="name">
         <input type="text" placeholder="habit" name="habit">
         <button type="submit">Submit</button>
@@ -19,22 +21,38 @@
     <div>
         <h2>Habit booster</h2>
         <p>
-          Replace a bad habit with a good one
+            Replace a bad habit with a good one
         </p>
         <button id="update-button">Replace a habit</button>
-      </div>
+    </div>
+
+
+
+    <section data-position="delete-quote">
+        <div>`
+            <h2>Delete Bad Habit!</h2>
+            <p>Deletes a bad habit from the list </p>
+            <button id="delete-button">Delete Bad Habit</button>
+        </div>
+        <div id="message"></div>
+    </section>
+
+
     <ul class="habits">
         <!-- Loop through habits -->
-        <% for(var i = 0; i < habits.length; i++) {%>
+        <% for(var i = 0; i < info.length; i++) {%>
         <li class="habit">
             <!-- Output name from the iterated quote object -->
-            <span><%= habits[i].name %></span>:
+            <span><%= info[i].name %></span>:
             <!-- Output quote from the iterated quote object -->
-            <span><%= habits[i].habit %></span>
+            <span><%= info[i].habit %></span>
+            <span class='fa fa-trash'></span>
         </li>
         <% } %>
     </ul>
-    <script src="/main.js"></script>
+
+
+    <script src="js/main.js"></script>
 </body>
 
 </html>
