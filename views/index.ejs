@@ -13,26 +13,41 @@
 <body>
     <h1>Cleanse bad habits, create new ones</h1>
     <form action="/addHabit" method="POST">
-        <input type="text" placeholder="Enter habit here" name="habit">
+        <input type="text" id="habit" placeholder="Enter habit here" name="habit">
         <br>
         <input type="radio" name="goodBad" value="Good" checked="checked">
             <label for="Good">Good</label><br>
         <input type="radio" name="goodBad" value="Bad">
             <label for="Bad">Bad</label><br>
-        <button type="submit">Submit</button>
+        <button type="submit" id="submit">Submit</button>
     </form>
     <h2>My Habits</h2>
 
-    <ul class="habits">
-        <!-- Loop through habits -->
+    <div class="goodHabits">
+        <h3>Good Habits</h3>
         <% for(var i = 0; i < info.length; i++) {%>
-        <li class="habit">
+        <span><% if (info[i].goodBad == 'Good') { %>
             <span><%= info[i].habit %></span>:
-            <span><%= info[i].goodBad %></span>
+            <%= info[i].goodBad %>
             <span class='fa fa-trash'></span>
-        </li>
+            <% } %>
+        </span>
+        <br>
         <% } %>
-    </ul>
+    </div>
+
+    <div class="BadHabits">
+        <h3>Bad Habits</h3>
+        <% for(var i = 0; i < info.length; i++) {%>
+        <span><% if (info[i].goodBad == 'Bad') { %>
+            <span><%= info[i].habit %></span>:
+            <%= info[i].goodBad %>
+            <span class='fa fa-trash'></span>
+            <% } %>
+        </span>
+        <br>
+        <% } %>
+    </div>
 
 
     <script src="js/main.js"></script>

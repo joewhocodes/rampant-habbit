@@ -1,11 +1,21 @@
 // main.js
 const deleteText = document.querySelectorAll('.fa-trash')
+const formValidation = document.querySelector('#submit')
+
+
+validateForm = () => {
+    const habitName =  document.querySelector('#habit').value;
+    !habitName ? alert("please enter a habit") : null
+    return
+    console.log(habitName)
+}
+
+formValidation.addEventListener('click', validateForm)
+
 
 Array.from(deleteText).forEach((element)=>{
     element.addEventListener('click', deleteHabit)
 })
-
-
 
 async function deleteHabit(){
     const habit = this.parentNode.childNodes[1].innerText
