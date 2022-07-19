@@ -7,60 +7,218 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rampant Habit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
     <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+    <header>
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">Rampant Habit</a>
+                <span class="navbar-text">
+                    Cleanse Bad Habits | Create Good Habits
+                </span>
+            </div>
+        </nav>
+    </header>
 
+    <h1 class="text-center mt-3 mb-5">MY HABITS</h1>
 
-    <h1>Cleanse bad habits, create new ones</h1>
-    <form action="/addHabit" method="POST">
-        <input type="text" id="habit" placeholder="Enter habit here" name="habit">
-        <br>
-        <input type="radio" name="goodBad" value="Good" checked="checked">
-            <label for="Good">Good</label><br>
-        <input type="radio" name="goodBad" value="Bad">
-            <label for="Bad">Bad</label><br>
-        <button type="submit" id="submit">Submit</button>
-    </form>
-
-    <form action="/addHabit" method="POST">
-        <label for="habit" name="habit">Choose a bad habit:</label>
-        <input type="hidden" name="goodBad" value="Bad">
-        <select name="habit">
-            <option value="Smoking">Smoking</option>
-            <option value="Eating Junk Food">Eating Junk Food</option>
-            <option value="Staying Up Late">Staying Up Late</option>
-        </select>
-        <button type="submit">Submit</button>
-    </form>
-
-
-    <h2>My Habits</h2>
-
-    <div class="good-habits">
-        <h3>Good Habits</h3>
-        <% for(var i = 0; i < info.length; i++) {%>
-        <span><% if (info[i].goodBad == 'Good') { %>
-            <span><%= info[i].habit %></span>
-            <span class='fa fa-trash'></span>
-            <% } %>
-        </span>
-        <% } %>
+    <div class="container row mx-auto" id="pick-a-habit"> 
+        <form action="/addHabit" method="POST" class="col">
+            <label for="habit" name="habit">Choose a good habit you want to create</label>
+            <br>
+            <input type="hidden" name="goodBad" value="Good">
+            <select name="habit">
+                <option value="Exercising">Exercising</option>
+                <option value="Meditating">Meditating</option>
+                <option value="Eating Healthily">Eating Healthily</option>
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <form action="/addHabit" method="POST" class="col">
+            <label for="habit" name="habit">Choose a bad habit you want to cleanse</label>
+            <br>
+            <input type="hidden" name="goodBad" value="Bad">
+            <select name="habit">
+                <option value="Smoking">Smoking</option>
+                <option value="Staying Up Late">Staying Up Late</option>
+                <option value="Social Media">Social Media</option>
+            </select>
+            <br>
+            <button type="submit">Submit</button>
+        </form>
+        <form action="/addHabit" method="POST" class="col">
+            Enter a custom habit here
+            <input type="text" id="habit" placeholder="Enter habit here" name="habit">
+            <input type="radio" name="goodBad" value="Good" checked="checked">
+                <label for="Good">Good</label>
+            <input type="radio" name="goodBad" value="Bad">
+                <label for="Bad">Bad</label><br>
+            <button type="submit" id="submit">Submit</button>
+        </form>
     </div>
 
 
 
-    <div class="bad-habits">
-        <h3>Bad Habits</h3>
+
+
+    <h2 class="text-center mt-5 mb-5">GOOD HABITS</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col border-start border-end border-bottom">
+                <h5>Habit</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Obvious</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Attractive</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Easy</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Satisfying</h5>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
         <% for(var i = 0; i < info.length; i++) {%>
-        <span><% if (info[i].goodBad == 'Bad') { %>
-            <span><%= info[i].habit %></span>
-            <span class='fa fa-trash'></span>
-            <% } %>
-        </span>
+        <% if (info[i].goodBad == 'Good') { %>
+        <div class="row">
+            <div class="col border-start border-end border-bottom">
+                <%= info[i].habit %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Exercising') { %>
+                Lay your gym clothes out the night before
+                <% } %>
+                <% if (info[i].habit == 'Meditating') { %>
+                Buy a meditating cushion and make it visible in your bedroom
+                <% } %>
+                <% if (info[i].habit == 'Eating Healthily') { %>
+                Place a fruit bowl on the dining table and keep it topped up with fruit
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Exercising') { %>
+                Listen to your favourite podcast or music whilst exercising
+                <% } %>
+                <% if (info[i].habit == 'Meditating') { %>
+                Join a culture of other people who meditate, or try a class
+                <% } %>
+                <% if (info[i].habit == 'Eating Healthily') { %>
+                Get a variety of your favourite fruit and veg
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Exercising') { %>
+                Choose a gym that's on your way to work
+                <% } %>
+                <% if (info[i].habit == 'Meditating') { %>
+                Chain the habit, by meditating before you eat breakfast every morning
+                <% } %>
+                <% if (info[i].habit == 'Eating Healthily') { %>
+                Get a fruit and veg box delivered weekly
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Exercising') { %>
+                Keep track of your weight, or strength progress
+                <% } %>
+                <% if (info[i].habit == 'Meditating') { %>
+                Make your favourite coffee immediately after meditating
+                <% } %>
+                <% if (info[i].habit == 'Eating Healthily') { %>
+                Record your energy levels when eating healthily
+                <% } %>
+            </div>
+            <div class="col-1 fa fa-trash">
+            </div>
+        </div>
+        <% } %>
+        <% } %>
+    </div>
+
+    <h2 class="text-center mt-5 mb-5">BAD HABITS</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col border-start border-end border-bottom">
+                <h5>Habit</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Invisible</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Unattractive</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Difficult</h5>
+            </div>
+            <div class="col border-end border-bottom">
+                <h5>Make it Unsatisfying</h5>
+            </div>
+            <div class="col-1">
+            </div>
+        </div>
+        <% for(var i = 0; i < info.length; i++) {%>
+        <% if (info[i].goodBad == 'Bad') { %>
+        <div class="row">
+            <div class="col border-start border-end border-bottom">
+                <%= info[i].habit %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Smoking') { %>
+                Throw away any cigarette paraphanelia you own
+                <% } %>
+                <% if (info[i].habit == 'Staying Up Late') { %>
+                Get an alarm clock, no phone/laptop in the bedroom
+                <% } %>
+                <% if (info[i].habit == 'Social Media') { %>
+                Delete the apps from your phone, only use social media on a laptop
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Smoking') { %>
+                Highlight the benefits of not smoking, keep a chart of the money you're saving
+                <% } %>
+                <% if (info[i].habit == 'Staying Up Late') { %>
+                Keep a list of all the productive things you get done staying up late, vs getting up early
+                <% } %>
+                <% if (info[i].habit == 'Social Media') { %>
+                Have an app that logs your screen time and check it every evening
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Smoking') { %>
+                Don't go to smoking areas at pubs, buy gum and patches to help cravings
+                <% } %>
+                <% if (info[i].habit == 'Staying Up Late') { %>
+                Have a timer that turns off the internet router at 10pm every night
+                <% } %>
+                <% if (info[i].habit == 'Social Media') { %>
+                Get a browser extension that time-limits your access to social media websites
+                <% } %>
+            </div>
+            <div class="col border-end border-bottom">
+                <% if (info[i].habit == 'Smoking') { %>
+                Join a support group and get an accountability partner
+                <% } %>
+                <% if (info[i].habit == 'Staying Up Late') { %>
+                Make a contract with your partner/parents that every time you stay up late you have to do a chore you hate
+                <% } %>
+                <% if (info[i].habit == 'Social Media') { %>
+                Pay £1 to a charity every time you go on Social Media
+                <% } %>
+            </div>
+            <div class="col-1 fa fa-trash">
+            </div>
+        </div>
+        <% } %>
         <% } %>
     </div>
 
