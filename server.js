@@ -3,6 +3,9 @@ const app = express();
 const MongoClient = require('mongodb').MongoClient;
 const PORT = 3000;
 require('dotenv').config();
+const { body, validationResult } = require('express-validator');
+const session = require('express-session');
+const flash = require('connect-flash');
 
 let db,
     dbConnectionStr = process.env.DB_STRING,
@@ -17,7 +20,13 @@ MongoClient.connect(dbConnectionStr, { useUnifiedTopology: true })
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
-app.use(express.json())
+app.use(express.json());
+app.use(session({
+    secret:'geeksforgeeks',
+    saveUninitialized: true,
+    resave: true
+}));
+app.use(flash());
 
 app.get('/', (req, res) => {
     db.collection('habits').find().toArray()
@@ -27,14 +36,21 @@ app.get('/', (req, res) => {
         .catch(error => console.error(error));
 });
 
-app.post('/addHabit', (req, res) => {
-    db.collection('habits').insertOne(req.body)
-    .then((result) => {
-        console.log('Habit added')
-        res.redirect('/');
-    })
-        .catch((error) => console.error(error));
+app.get('/gfg', (req, res) => {
+    res.send(req.flash('message'));
 });
+
+app.post('/addHabit', (req, res) => {
+    console.log(req.body)
+    db.collection('habits')
+        .insertOne(req.body)
+        .then((result) => {
+            console.log('Habit added');
+            res.redirect('/');
+        })
+        .catch((error) => console.error(error));
+    }
+);
 
 
 app.delete('/deleteHabit', (req, res) => {

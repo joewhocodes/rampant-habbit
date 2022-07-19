@@ -8,9 +8,13 @@
     <title>Rampant Habit</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
 </head>
 
 <body>
+
+
     <h1>Cleanse bad habits, create new ones</h1>
     <form action="/addHabit" method="POST">
         <input type="text" id="habit" placeholder="Enter habit here" name="habit">
@@ -21,36 +25,49 @@
             <label for="Bad">Bad</label><br>
         <button type="submit" id="submit">Submit</button>
     </form>
+
+    <form action="/addHabit" method="POST">
+        <label for="habit" name="habit">Choose a bad habit:</label>
+        <input type="hidden" name="goodBad" value="Bad">
+        <select name="habit">
+            <option value="Smoking">Smoking</option>
+            <option value="Eating Junk Food">Eating Junk Food</option>
+            <option value="Staying Up Late">Staying Up Late</option>
+        </select>
+        <button type="submit">Submit</button>
+    </form>
+
+
     <h2>My Habits</h2>
 
-    <div class="goodHabits">
+    <div class="good-habits">
         <h3>Good Habits</h3>
         <% for(var i = 0; i < info.length; i++) {%>
         <span><% if (info[i].goodBad == 'Good') { %>
-            <span><%= info[i].habit %></span>:
-            <%= info[i].goodBad %>
+            <span><%= info[i].habit %></span>
             <span class='fa fa-trash'></span>
             <% } %>
         </span>
-        <br>
         <% } %>
     </div>
 
-    <div class="BadHabits">
+
+
+    <div class="bad-habits">
         <h3>Bad Habits</h3>
         <% for(var i = 0; i < info.length; i++) {%>
         <span><% if (info[i].goodBad == 'Bad') { %>
-            <span><%= info[i].habit %></span>:
-            <%= info[i].goodBad %>
+            <span><%= info[i].habit %></span>
             <span class='fa fa-trash'></span>
             <% } %>
         </span>
-        <br>
         <% } %>
     </div>
 
 
     <script src="js/main.js"></script>
+    <!-- Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
 </body>
 
 </html>
