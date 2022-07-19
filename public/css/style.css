@@ -1,12 +1,15 @@
 h1, h2 {
-    color: #cdb97d;
+    color: #f7dcad;
+    font-family: 'DM Serif Display', serif;
 }
 
-nav {
-    background-color: #e3c1be;
+body header nav {
+    color: #e7a339;
+    font-family: 'DM Serif Display', serif;
 }
 
 body {  
-    background-color: #6868ac;
-    color: #e3c1be;
+    background-color: #4aafd5; 
+    color: white;
+    font-family: 'Roboto', sans-serif;
 }
